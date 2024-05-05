@@ -1,7 +1,11 @@
-
+var model;
 async function findFaces() {
-  const model = await blazeface.load();  
+  const status = document.getElementById("status");
+  status.style = "display:block";
+  status.innerText = "Loading model ...";
+  if (!model) model = await blazeface.load();
   const img = document.querySelector("img");
+  status.innerText = "Predicting...";
   const predictions = await model.estimateFaces(img, false);
   if (predictions.length > 0) {
     console.log(predictions);
@@ -21,4 +25,15 @@ async function findFaces() {
     document.getElementById("status").innerText = "No Face Found";
   }
 }
-findFaces();
+document.getElementById("file").onchange = function (e) {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
+    const img = document.getElementById("image");
+    img.src = reader.result;
+    img.onload = function () {
+      findFaces();
+    };
+  };
+};

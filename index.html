@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,9 +8,10 @@
   </head>
   <body>
     <div id="face-finder">
+      <p id="status" style="display: none"></p>
+      <input type="file" id="file" />
       <canvas id="canvas"></canvas>
-      <img src="image.jpg" />
-      <p id="status">Searching, this shouldn't take long...</p>
+      <img id="image" src="" />
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
